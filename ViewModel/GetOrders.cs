@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Repository;
 
 namespace ViewModel
 {
     /// <summary>
-    /// Получить заказы.
+    /// Получить все заказы.
     /// </summary>
     public class GetOrders
     {

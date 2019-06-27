@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model;
 
 namespace DomainModel
@@ -12,8 +7,10 @@ namespace DomainModel
     {
         private static readonly string connect = "DataBase";
 
+
         public Context() : base(connect)
         {
+            Database.SetInitializer(new MyContextInitializer());
         }
 
         public DbSet<Goods> Goods { get; set; }

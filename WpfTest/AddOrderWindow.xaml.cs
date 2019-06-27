@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using ViewModel;
 
 namespace WpfTest
 {
@@ -22,6 +13,55 @@ namespace WpfTest
         public AddOrderWindow()
         {
             InitializeComponent();
+            cbSelectedNameGoods.ItemsSource = new GetAllNamesGoods().GetAllNames;
+            dtpDateOrder.Text = DateTime.Now.ToShortDateString();
+        }
+
+        /// <summary>
+        /// Закрытие модального окна.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Запрет ввода не цифровых данных.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbCountGoods_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Сохранение нового заказа.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var date = dtpDateOrder.DisplayDate;
+            var nameGoods = cbSelectedNameGoods.SelectedItem.ToString();
+            int count = 0;
+            try
+            {
+                count = Convert.ToInt32(tbCountGoods.Text);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception($"{tbCountGoods.Text} не является числом!");
+            }
+
+            new SaveOrder(date, nameGoods, count);
+
+            this.Close();
         }
     }
 }

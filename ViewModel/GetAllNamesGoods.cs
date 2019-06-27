@@ -4,6 +4,9 @@ using Model.Repository;
 
 namespace ViewModel
 {
+    /// <summary>
+    /// Получить все наименования товаров.
+    /// </summary>
     public class GetAllNamesGoods
     {
         private readonly UnitOfWork uow = new UnitOfWork();

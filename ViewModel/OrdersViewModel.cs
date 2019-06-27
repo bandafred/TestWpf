@@ -4,6 +4,9 @@ using System.Windows.Data;
 
 namespace ViewModel
 {
+    /// <summary>
+    /// Связывание модели и интерфейса пользователя.
+    /// </summary>
     public class OrdersViewModel : DependencyObject
     {
         public ICollectionView Items

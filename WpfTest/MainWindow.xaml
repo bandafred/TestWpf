@@ -4,30 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTest"
+        xmlns:viewModel="clr-namespace:ViewModel;assembly=ViewModel"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinWidth="800" MinHeight="450">
+        Title="Тестовое задание" Height="450" Width="800" MinWidth="800" MinHeight="450" WindowStartupLocation="CenterScreen" WindowState="Maximized" Activated="Window_Activated">
+    <Window.Resources>
+        <viewModel:DateTimeToDateConverter x:Key="myDateConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="307*"/>
-            <RowDefinition Height="87*"/>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
-            <DataGrid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FFA21414" Offset="1"/>
-                </LinearGradientBrush>
-            </DataGrid.Background>
+        <DataGrid x:Name="dgOrders" ItemsSource="{Binding Items}" AutoGenerateColumns="False" Grid.Row="1" Background="#FFD1DBDF" FontSize="18.667" RowBackground="LightGray" AlternatingRowBackground="White" SelectionChanged="DataGrid_SelectedCellsChanged" Margin="0" IsReadOnly="True">
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата заказа" Binding="{Binding Date}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата заказа" Binding="{Binding Date, Converter={StaticResource myDateConverter}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Наименование товара" Binding="{Binding NameGoods}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Название производителя" Binding="{Binding NameManufacturer}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество" Binding="{Binding Count}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Общая стоимость" Binding="{Binding Summ}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Добавить заказ" Margin="0" Grid.Row="2" FontSize="18.667" Background="#FF1ED0FC" Foreground="White" Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click"/>
-        <ToolBar Height="20" Margin="0" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <Button Content="Добавить заказ" Margin="0" Grid.Row="3" FontSize="18.667" Background="#FF0D73C7" Foreground="White" Click="Button_Click" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150"/>
+        <TextBlock Margin="301,6,300.6,5" TextWrapping="Wrap" Text="Просмотр заказов" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21.333" FontWeight="Bold" Foreground="#FF0D73C7" Height="29" Width="192"/>
+        <TextBlock x:Name="tbSumm" HorizontalAlignment="Left" Margin="15,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Итого:" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
     </Grid>
 </Window>
