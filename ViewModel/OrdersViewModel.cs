@@ -22,8 +22,8 @@ namespace ViewModel
         public OrdersViewModel()
         {
             var ordersModel = new GetOrders().GetAllOrders;
-
             Items = CollectionViewSource.GetDefaultView(ordersModel);
+
         }
     }
 }
